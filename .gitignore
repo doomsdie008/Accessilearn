@@ -1,0 +1,17 @@
+# Secrets — never commit your actual API keys
+.env
+
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# Generated audio files (these are output, not source)
+backend/audio_output/*.mp3
+
+# OS/editor junk
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

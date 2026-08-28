@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AccessiLearn — Turn lessons into listening</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<div id="announcer" class="sr-only" aria-live="polite"></div>
+
+<header class="topbar" data-speak="AccessiLearn header">
+  <div class="topbar-inner">
+    <span class="wordmark" data-speak="AccessiLearn. Turn lessons into listening.">
+      <span class="wordmark-dot" aria-hidden="true"></span>AccessiLearn
+    </span>
+
+    <div class="topbar-controls">
+      <button id="voiceGuideToggle" class="pill-btn" type="button"
+        data-speak="Cursor voice guide toggle, currently on"
+        aria-pressed="true">
+        🔊 Cursor Voice Guide: <span id="voiceGuideState">On</span>
+      </button>
+      <button id="textSizeToggle" class="pill-btn" type="button"
+        data-speak="Increase text size">
+        A+ Text Size
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="hero" data-speak="Section: Get started. Turn a textbook chapter, diagram, or video description into a narrated audio lesson.">
+    <h1>Turn what you'd normally have to <em>see</em>, into something you can <em>hear</em>.</h1>
+    <p class="hero-sub">Paste a textbook chapter, upload a chapter PDF, or describe a diagram or video — AccessiLearn rewrites it into a warm, podcast-style lesson and reads it aloud.</p>
+  </section>
+
+  <section class="panel" aria-labelledby="source-heading" data-speak="Section: Add your source material">
+    <h2 id="source-heading">1. Add your source material</h2>
+
+    <div class="tabs" role="tablist" aria-label="Choose source type">
+      <button class="tab" role="tab" aria-selected="true" data-mode="textbook" data-speak="Tab: Paste or type text">📄 Paste text</button>
+      <button class="tab" role="tab" aria-selected="false" data-mode="pdf" data-speak="Tab: Upload a PDF chapter">📚 Upload PDF</button>
+      <button class="tab" role="tab" aria-selected="false" data-mode="image" data-speak="Tab: Upload a diagram or photo">🖼️ Diagram / photo</button>
+    </div>
+
+    <div id="panel-textbook" class="tab-panel" role="tabpanel">
+      <label for="titleInput">Lesson title (optional)</label>
+      <input id="titleInput" type="text" placeholder="e.g. Chapter 4: Newton's Laws of Motion" data-speak="Lesson title, optional text field" />
+
+      <label for="textInput">Chapter text</label>
+      <textarea id="textInput" rows="10" placeholder="Paste the textbook chapter text here..." data-speak="Chapter text, paste your content here"></textarea>
+    </div>
+
+    <div id="panel-pdf" class="tab-panel" hidden>
+      <label for="pdfInput">Upload a PDF chapter</label>
+      <input id="pdfInput" type="file" accept="application/pdf" data-speak="Upload PDF file input" />
+      <p class="hint">We'll pull the text out of the PDF automatically.</p>
+    </div>
+
+    <div id="panel-image" class="tab-panel" hidden>
+      <label for="imageInput">Upload a diagram, chart, or photo</label>
+      <input id="imageInput" type="file" accept="image/*" data-speak="Upload image file input" />
+      <p class="hint">Claude will describe the image in full detail before narrating it.</p>
+    </div>
+
+    <button id="generateBtn" class="primary-btn" type="button" data-speak="Generate audio lesson button">
+      🎙️ Generate audio lesson
+    </button>
+
+    <p id="statusMsg" role="status" class="status-msg"></p>
+  </section>
+
+  <section class="panel" id="resultPanel" hidden aria-labelledby="result-heading" data-speak="Section: Your audio lesson">
+    <h2 id="result-heading">2. Your audio lesson</h2>
+
+    <audio id="audioPlayer" controls data-speak="Audio player for your generated lesson"></audio>
+
+    <details class="transcript-box">
+      <summary data-speak="Show full transcript">Show full transcript</summary>
+      <p id="transcriptText"></p>
+    </details>
+
+    <a id="downloadLink" class="secondary-btn" download="lesson.mp3" data-speak="Download audio file link">
+      ⬇️ Download MP3
+    </a>
+  </section>
+
+</main>
+
+<footer class="footer" data-speak="Footer: Built for accessible education">
+  Built for the visually impaired learning accessibility project · India
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

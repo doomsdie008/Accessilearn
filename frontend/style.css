@@ -1,0 +1,193 @@
+/* ---- Design tokens -----------------------------------------------------
+   Palette chosen for a "late-night radio booth" feel: deep ink background,
+   warm amber accent (the "on-air" glow), soft paper-white text.
+---------------------------------------------------------------------------*/
+:root {
+  --ink: #12141c;
+  --ink-panel: #1b1e29;
+  --paper: #f4f1ea;
+  --amber: #e8a445;
+  --amber-dim: #a5743a;
+  --focus: #ffd166;
+  --radius: 14px;
+  --font-scale: 1;
+}
+
+* { box-sizing: border-box; }
+
+html { font-size: calc(17px * var(--font-scale)); }
+
+body {
+  margin: 0;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  background: var(--amber);
+  color: var(--ink);
+  padding: 12px 20px;
+  z-index: 100;
+  font-weight: 700;
+  border-radius: 0 0 8px 0;
+}
+.skip-link:focus {
+  left: 0;
+}
+
+/* Strong, unmistakable focus ring everywhere */
+:focus-visible {
+  outline: 4px solid var(--focus);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* ---- Header -------------------------------------------------------------*/
+.topbar {
+  background: var(--ink-panel);
+  border-bottom: 2px solid var(--amber-dim);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.topbar-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 18px 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: center;
+  justify-content: space-between;
+}
+.wordmark {
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.wordmark-dot {
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--amber);
+  box-shadow: 0 0 10px 3px rgba(232,164,69,0.6);
+}
+.topbar-controls { display: flex; gap: 10px; flex-wrap: wrap; }
+
+.pill-btn {
+  background: transparent;
+  border: 2px solid var(--amber-dim);
+  color: var(--paper);
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+.pill-btn:hover { border-color: var(--amber); }
+.pill-btn[aria-pressed="true"] { background: var(--amber); color: var(--ink); font-weight: 700; }
+
+/* ---- Layout --------------------------------------------------------------*/
+main { max-width: 900px; margin: 0 auto; padding: 30px 20px 80px; }
+
+.hero { padding: 30px 0 40px; border-bottom: 1px solid #2a2e3d; margin-bottom: 30px; }
+.hero h1 { font-size: 2rem; line-height: 1.3; margin: 0 0 14px; }
+.hero h1 em { color: var(--amber); font-style: normal; }
+.hero-sub { font-size: 1.1rem; color: #cfcabf; max-width: 60ch; }
+
+.panel {
+  background: var(--ink-panel);
+  border: 1px solid #2a2e3d;
+  border-radius: var(--radius);
+  padding: 28px;
+  margin-bottom: 26px;
+}
+.panel h2 { margin-top: 0; font-size: 1.4rem; }
+
+label { display: block; font-weight: 700; margin: 18px 0 8px; }
+input[type="text"], textarea {
+  width: 100%;
+  background: var(--ink);
+  color: var(--paper);
+  border: 2px solid #383d52;
+  border-radius: 10px;
+  padding: 14px;
+  font-size: 1rem;
+  font-family: inherit;
+}
+input[type="file"] {
+  color: var(--paper);
+  font-size: 1rem;
+}
+.hint { color: #9c97a0; font-size: 0.9rem; margin-top: 6px; }
+
+/* ---- Tabs ---------------------------------------------------------------*/
+.tabs { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 6px; }
+.tab {
+  background: var(--ink);
+  border: 2px solid #383d52;
+  color: var(--paper);
+  padding: 10px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+.tab[aria-selected="true"] { border-color: var(--amber); background: #2b2416; }
+
+.tab-panel { padding-top: 10px; }
+
+/* ---- Buttons --------------------------------------------------------------*/
+.primary-btn {
+  margin-top: 24px;
+  background: var(--amber);
+  color: var(--ink);
+  border: none;
+  font-weight: 800;
+  font-size: 1.1rem;
+  padding: 16px 26px;
+  border-radius: 12px;
+  cursor: pointer;
+  width: 100%;
+}
+.primary-btn:hover { background: #f0b562; }
+.primary-btn:disabled { opacity: 0.6; cursor: progress; }
+
+.secondary-btn {
+  display: inline-block;
+  margin-top: 16px;
+  background: transparent;
+  border: 2px solid var(--amber);
+  color: var(--amber);
+  padding: 12px 20px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.status-msg { margin-top: 14px; font-weight: 600; color: var(--amber); min-height: 1.4em; }
+
+/* ---- Result panel ---------------------------------------------------------*/
+audio { width: 100%; margin-top: 12px; }
+.transcript-box { margin-top: 20px; background: var(--ink); border-radius: 10px; padding: 16px; }
+.transcript-box summary { cursor: pointer; font-weight: 700; color: var(--amber); }
+#transcriptText { white-space: pre-wrap; margin-top: 12px; color: #ded9cf; }
+
+.footer { text-align: center; padding: 30px; color: #6f6a72; font-size: 0.9rem; }
+
+@media (max-width: 600px) {
+  .hero h1 { font-size: 1.5rem; }
+}
